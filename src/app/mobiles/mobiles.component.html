@@ -1,0 +1,61 @@
+
+<div  class="mob-table container"  *ngIf="mobile; else err" >
+    <div class="header">
+        <h2 class="table-title ">Manage Mobiles</h2>
+        <button class="btn add"  (click)="openForm()">Add Mobiles</button>
+    </div>
+    <table class="table">
+        <thead>
+           <tr>
+             <th>Mobile</th>
+             <th>Price</th>
+             <th>RAM</th>
+             <th>Storage</th>
+             <th></th>
+             <th></th>
+           </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr *ngFor="let x of mobile">
+                <td>{{x.name}}</td>
+                <td>{{x.price}}</td>
+                <td>{{x.ram}}</td>
+                <td>{{x.storage}}</td>
+                <td> 
+                    <button class="btn btn-primary fd" (click)="openForm(x)">Edit</button>
+                </td>
+                <td>
+                    <button class="btn btn-danger fd" (click)="deleteData(x.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<ng-template #err class="text-danger">
+  <p>Fetching error data</p>
+</ng-template>
+<div class="form-wrapper" *ngIf="showForm">
+    <div class="mobile-form">
+        <h2 class="text-center text-info">{{formHeader}}</h2>
+        <div class="group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" [(ngModel)]="mobileName" name="mname">
+        </div>
+        <div class="group">
+            <label for="price">Price:</label>
+            <input type="number" class="form-control" [(ngModel)]="price" name="price">
+        </div>
+        <div class="group">
+            <label for="ram">RAM:</label>
+            <input type="number" class="form-control" [(ngModel)]="ram" name="ram">
+        </div>
+        <div class="group">
+            <label for="storage">Storage:</label>
+            <input type="number" class="form-control" [(ngModel)]="storage" name="storage">
+        </div>
+        <div class="action"> 
+            <button class="btn btn-primary save" (click)="saveMobile()">save</button>
+            <button class="btn btn-danger cancel" (click)="cancel()">cancel</button>
+        </div>
+    </div>
+</div>
